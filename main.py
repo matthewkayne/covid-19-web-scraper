@@ -1,26 +1,25 @@
-#data from https://www.worldometers.info
-import requests
-from bs4 import BeautifulSoup
+from flask import Flask, redirect, url_for, render_template, request
+import coronaWebScrape
 
-print("\nCorona Updates\n")
+app = Flask(__name__)
 
-while True:
-  print("If the country name has multiple words, add a '-' between them")
-  country=input("Enter the name of the country: ")
+@app.route("/", methods=["GET", "POST"])
+def home():
+    if request.method == "POST":
+        country = request.form["nm"]
+        return redirect(url_for("country", ctr=country))
+    else:
+        return render_template("index.html")
+    
+@app.route("/<ctr>")
+def country(ctr):
+    ctr = coronaWebScrape.scrape(ctr)
+    if ctr == None:
+        return redirect(url_for("home"))
+    else:
+        return f"""<h2>{ctr}</h2><p><a href="{{url_for(app.home)}}">Return Home</a></p>"""
 
-  url="https://www.worldometers.info/coronavirus/country/"+country
 
-  response = requests.get(url)
-  soup = BeautifulSoup(response.text, "html.parser")
-  html_line=str(soup.findAll("title"))
 
-  html_line = html_line.replace(',', '')
-  int_list = [int(s) for s in html_line.split() if s.isdigit()]
-
-  finish = "The total cases in",country,"is",int_list[0],"and the total number of deaths is", int_list[1]
-
-  finish = str(finish).replace('(', '')
-  finish = str(finish).replace(')', '')
-  finish = str(finish).replace("'", '')
-
-  print("\n",finish)
+if __name__ == "__main__":
+    app.run(debug=True)
