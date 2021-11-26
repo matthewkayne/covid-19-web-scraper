@@ -3,7 +3,6 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 
-
 def scrape(country):
   country=str(country).replace(" ","-")
 

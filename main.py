@@ -19,7 +19,5 @@ def country(ctr):
     else:
         return f"""<h2>{ctr}</h2><p><a href="{{url_for(app.home)}}">Return Home</a></p>"""
 
-
-
 if __name__ == "__main__":
     app.run()
