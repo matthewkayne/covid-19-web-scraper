@@ -1,6 +1,5 @@
 #data from https://www.worldometers.info
 import requests
-import urllib.request
 from bs4 import BeautifulSoup
 
 print("\nCorona Updates\n")

@@ -1,0 +1,6 @@
+# System file
+.DS_Store
+# Python files
+__pycache__/
+poetry.lock
+pyproject.toml
