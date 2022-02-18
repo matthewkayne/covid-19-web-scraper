@@ -24,7 +24,7 @@ def scrape(country):
 
     html_line = html_line.replace(',', '')
     int_list = [int(s) for s in html_line.split() if s.isdigit()]
-
+    print(int_list)
     finish = "The total cases in",country.upper(),"is",int_list[0],"and the total number of deaths is", int_list[1]
 
     finish = str(finish).replace('(', '')
