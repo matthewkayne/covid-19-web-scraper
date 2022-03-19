@@ -20,15 +20,21 @@ def scrape(country):
     response = requests.get(url)
     
     soup = BeautifulSoup(response.text, "html.parser")
-    html_line=str(soup.findAll("title"))
+    html_line=soup.findAll("div", class_="maincounter-number")
+    numbers=[]
+    for i in range(0,2):
+      num = ""
+      for c in str(html_line[i]):
+        if c.isdigit():
+          num = num + c
+      numbers.append(num)
 
-    html_line = html_line.replace(',', '')
-    int_list = [int(s) for s in html_line.split() if s.isdigit()]
-    print(int_list)
-    finish = "The total cases in",country.upper(),"is",int_list[0],"and the total number of deaths is", int_list[1]
+    finish = "The total cases in",country.upper(),"is",numbers[0],"and the total number of deaths is", numbers[1]
 
     finish = str(finish).replace('(', '')
     finish = str(finish).replace(')', '')
     finish = str(finish).replace("'", '')
 
     return finish
+
+print(scrape("spain"))
