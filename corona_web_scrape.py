@@ -9,8 +9,8 @@ def scrape(country):
     """Scrape Function"""
     country = str(country).replace(" ", "-")
 
-    with open('data.csv', newline='', encoding="utf-8") as f:
-        reader = csv.reader(f)
+    with open('data.csv', newline='', encoding="utf-8") as file:
+        reader = csv.reader(file)
         data = list(reader)
         data = data[0]
 
@@ -25,9 +25,9 @@ def scrape(country):
     numbers = []
     for i in range(0, 2):
         num = ""
-        for c in str(html_line[i]):
-            if c.isdigit():
-                num = num + c
+        for line in str(html_line[i]):
+            if line.isdigit():
+                num = num + line
         numbers.append(num)
 
     finish = "The total cases in", country.upper(
