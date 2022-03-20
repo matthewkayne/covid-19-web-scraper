@@ -12,8 +12,7 @@ def home():
     if request.method == "POST":
         country_input = request.form["nm"]
         return redirect(url_for("country", ctr=country_input))
-    else:
-        return render_template("index.html")
+    return render_template("index.html")
 
 
 @app.route("/<ctr>")
@@ -22,8 +21,7 @@ def country(ctr):
     ctr = corona_web_scrape.scrape(ctr)
     if ctr is None:
         return redirect(url_for("home"))
-    else:
-        return f"""<h2>{ctr}</h2><p><a href="{{url_for(app.home)}}">Return Home</a></p>"""
+    return f"""<h2>{ctr}</h2><p><a href="{{url_for(app.home)}}">Return Home</a></p>"""
 
 
 if __name__ == "__main__":
