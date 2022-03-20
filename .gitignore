@@ -1,8 +1,13 @@
 # System file
 .DS_Store
+
 # Python files
 __pycache__/
 poetry.lock
 pyproject.toml
+
+# Visual Studio Code
+.vscode
+
 # Custom
 test.py
