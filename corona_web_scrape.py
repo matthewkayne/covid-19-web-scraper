@@ -17,27 +17,26 @@ def scrape(country):
     if country.lower() not in data:
         return None
 
-    else:
-        url = "https://www.worldometers.info/coronavirus/country/"+country
+    url = "https://www.worldometers.info/coronavirus/country/"+country
 
-        response = requests.get(url)
-        soup = BeautifulSoup(response.text, "html.parser")
-        html_line = soup.findAll("div", class_="maincounter-number")
-        numbers = []
-        for i in range(0, 2):
-            num = ""
-            for c in str(html_line[i]):
-                if c.isdigit():
-                    num = num + c
-            numbers.append(num)
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, "html.parser")
+    html_line = soup.findAll("div", class_="maincounter-number")
+    numbers = []
+    for i in range(0, 2):
+        num = ""
+        for c in str(html_line[i]):
+            if c.isdigit():
+                num = num + c
+        numbers.append(num)
 
-        finish = "The total cases in", country.upper(
-        ), "is", numbers[0], "and the total number of deaths is", numbers[1]
-        finish = str(finish).replace('(', '')
-        finish = str(finish).replace(')', '')
-        finish = str(finish).replace("'", '')
+    finish = "The total cases in", country.upper(
+    ), "is", numbers[0], "and the total number of deaths is", numbers[1]
+    finish = str(finish).replace('(', '')
+    finish = str(finish).replace(')', '')
+    finish = str(finish).replace("'", '')
 
-        return finish
+    return finish
 
 
 print(scrape("spain"))
