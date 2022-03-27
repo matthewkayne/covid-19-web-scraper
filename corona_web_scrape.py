@@ -37,6 +37,3 @@ def scrape(country):
     finish = str(finish).replace("'", '')
 
     return finish
-
-
-print(scrape("spain"))
