@@ -4,4 +4,4 @@
 
 This is a simple website that scrapes data of Coronavirus cases per country
 
-[Live Site](https://covid-19-web-scraper.herokuapp.com)
+[Live Site](https://covid-19-web-scraper.netlify.app/)
